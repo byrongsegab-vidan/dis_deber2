@@ -1,0 +1,121 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="dis_deber2.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - dis_deber2</title>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/Content/Admin.css" rel="stylesheet" type="text/css" runat="server" id="lnkAdminCss" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+            </Scripts>
+        </asp:ScriptManager>
+
+        <asp:Panel ID="pnlRoot" runat="server">
+            <asp:Panel ID="pnlSidebar" runat="server" Visible="false" CssClass="admin-sidebar">
+                <a class="admin-brand" runat="server" href="~/">
+                    <span class="admin-brand-icon">⚙️</span> dis_deber2
+                </a>
+                <ul class="admin-nav">
+                    <li><a runat="server" href="~/Perfil.aspx" id="navPerfil"><span class="admin-nav-icon">👤</span> Mi perfil</a></li>
+                    <li><a runat="server" href="~/" id="navInicio"><span class="admin-nav-icon">🏠</span> Inicio</a></li>
+                    <li><a runat="server" href="~/BuscarProductos.aspx" id="navBuscar"><span class="admin-nav-icon">🔍</span> Buscar</a></li>
+                    <li><a runat="server" href="~/Productos.aspx" id="navProductos"><span class="admin-nav-icon">📦</span> Productos</a></li>
+                    <li><a runat="server" href="~/Proveedores.aspx" id="navProveedores"><span class="admin-nav-icon">🤝</span> Proveedores</a></li>
+                    <li><a runat="server" href="~/Estadisticas.aspx" id="navEstadisticas"><span class="admin-nav-icon">📊</span> Estadísticas</a></li>
+                    <li><a runat="server" href="~/CargaMasiva.aspx" id="navCarga"><span class="admin-nav-icon">☁️</span> Carga masiva</a></li>
+                </ul>
+                <div class="admin-sidebar-footer">&copy; <%: DateTime.Now.Year %> - ITSCO dis_deber2</div>
+            </asp:Panel>
+
+            <asp:Panel ID="pnlSidebarCliente" runat="server" Visible="false" CssClass="admin-sidebar">
+                <a class="admin-brand" runat="server" href="~/Catalogo.aspx">
+                    <span class="admin-brand-icon">🛍️</span> dis_deber2
+                </a>
+                <ul class="admin-nav">
+                    <li><a runat="server" href="~/Catalogo.aspx" id="navCliCatalogo"><span class="admin-nav-icon">🏪</span> Catálogo</a></li>
+                    <li>
+                        <a runat="server" href="~/Carrito.aspx" id="navCliCarrito">
+                            <span class="admin-nav-icon">🛒</span> Carrito de tienda
+                            (<asp:Label ID="lblNavCarritoCli" runat="server" Text="0" />)
+                        </a>
+                    </li>
+                    <li><a runat="server" href="~/Rombito.aspx" id="navCliRombito"><span class="admin-nav-icon">💎</span> Rombito</a></li>
+                    <li><a runat="server" href="~/Perfil.aspx" id="navCliPerfil"><span class="admin-nav-icon">👤</span> Mi perfil</a></li>
+                </ul>
+                <div class="admin-sidebar-footer">&copy; <%: DateTime.Now.Year %> - ITSCO dis_deber2</div>
+            </asp:Panel>
+
+            <div class="admin-main-area">
+                <asp:Panel ID="pnlAdminTopbar" runat="server" Visible="false" CssClass="admin-topbar">
+                    <div class="admin-user-pill">
+                        <asp:Label ID="lblUsuarioAdmin" runat="server" />
+                    </div>
+                    <asp:LinkButton ID="lnkSalirAdmin" runat="server" CssClass="admin-btn-salir" OnClick="lnkSalir_Click">Salir</asp:LinkButton>
+                </asp:Panel>
+
+                <asp:Panel ID="pnlNavbarCliente" runat="server" Visible="false">
+                    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                        <div class="container">
+                            <a class="navbar-brand" runat="server" href="~/Catalogo.aspx">dis_deber2</a>
+                            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMain">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navMain">
+                                <ul class="navbar-nav me-auto">
+                                    <asp:PlaceHolder ID="phNavComun" runat="server" Visible="false">
+                                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Perfil.aspx">Mi perfil</a></li>
+                                    </asp:PlaceHolder>
+                                    <asp:PlaceHolder ID="phNavCliente" runat="server" Visible="false">
+                                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Catalogo.aspx">Catálogo</a></li>
+                                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Rombito.aspx">Rombito</a></li>
+                                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Carrito.aspx">Carrito (<asp:Label ID="lblNavCarrito" runat="server" Text="0" />)</a></li>
+                                    </asp:PlaceHolder>
+                                </ul>
+                                <asp:Panel ID="pnlUsuario" runat="server" Visible="false" CssClass="text-light small">
+                                    <asp:Label ID="lblUsuario" runat="server" />
+                                    <asp:LinkButton ID="lnkSalir" runat="server" CssClass="btn btn-sm btn-outline-light ms-2" OnClick="lnkSalir_Click">Salir</asp:LinkButton>
+                                </asp:Panel>
+                            </div>
+                        </div>
+                    </nav>
+                </asp:Panel>
+
+                <asp:Panel ID="pnlContentWrap" runat="server" CssClass="body-content py-4">
+                    <div class="container-fluid px-0">
+                        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+                    </div>
+                    <asp:Panel ID="pnlFooterCliente" runat="server" Visible="false">
+                        <hr />
+                        <footer><p>&copy; <%: DateTime.Now.Year %> - ITSCO dis_deber2</p></footer>
+                    </asp:Panel>
+                </asp:Panel>
+            </div>
+        </asp:Panel>
+    </form>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/Scripts/bootstrap.js") %>
+    </asp:PlaceHolder>
+</body>
+</html>

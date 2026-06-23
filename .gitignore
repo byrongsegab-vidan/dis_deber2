@@ -1,0 +1,45 @@
+## Ignore Visual Studio temporary files, build results, and NuGet packages
+
+# Visual Studio files
+.vs/
+*.vsidx
+*.suo
+*.user
+*.userpowershell
+*.userprefs
+*.csproj.user
+*.sqlproj.user
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Re]leasePublic/
+x64/
+x86/
+build/
+bin/
+obj/
+App_Data/Temp/
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NuGet Packages
+*.nuget.props
+*.nuget.targets
+packages/
+!packages/repositories.config
+
+# VS Code
+.vscode/
+
+# Rider
+.idea/
+
+# Windows temp files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
