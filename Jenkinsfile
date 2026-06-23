@@ -51,7 +51,7 @@ pipeline {
                     Write-Host "Probando conexión con el servidor SQL Server local..." -ForegroundColor Cyan
                     try {
                         # Obtenemos la conexión con la base de datos dis_deber2_db
-                        $connectionString = "Server=ISADORA\\vinic;Database=dis_deber2_db;Integrated Security=True;"
+                        $connectionString = "Server=.;Database=dis_deber2_db;Integrated Security=True;"
                         $connection = New-Object System.Data.SqlClient.SqlConnection($connectionString)
                         $connection.Open()
                         Write-Host "Prueba de conexión a SQL Server (ISADORA\\vinic): EXITOSA" -ForegroundColor Green
