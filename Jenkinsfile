@@ -20,8 +20,8 @@ pipeline {
         stage('Compilar Solución') {
             steps {
                 echo 'Compilando el monolito .NET Framework 4.8...'
-                // Compila la solución en configuración Release y la publica en una carpeta temporal dentro de la workspace
-                bat "\"${MSBUILD}\" dis_deber2.slnx /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile /p:PublishUrl=\"${WORKSPACE}\\publish\" /p:DeployDefaultTarget=WebPublish"
+                // Compila el csproj de la aplicación y lo publica en la carpeta temporal de Jenkins sin necesidad de perfiles de publicación (.pubxml)
+                bat "\"${MSBUILD}\" dis_deber2\\dis_deber2.csproj /p:Configuration=Release /p:WebProjectOutputDir=\"${WORKSPACE}\\publish\" /p:OutDir=\"${WORKSPACE}\\publish\\bin\\\\\" /t:Rebuild"
             }
         }
         
@@ -67,7 +67,6 @@ pipeline {
         stage('Publicar Aplicación') {
             steps {
                 echo 'Empaquetando artefactos compilados...'
-                // En este paso, el build en la etapa anterior ya colocó todo listo en la carpeta ${WORKSPACE}\publish
                 powershell '''
                     if (Test-Path "publish") {
                         Write-Host "Carpeta de publicación verificada y lista para despliegue." -ForegroundColor Green
